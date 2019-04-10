@@ -1,0 +1,33 @@
+
+.sign-box {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.green-btn{
+	background: rgb(65,168,99);
+	color: #FFFFFF;
+	margin-top: 15px;
+	text-align: center;
+}
+.uni-input{
+	border-bottom: 1px solid #EEEEEE;
+	font-size: 18px;
+	height: 50px;
+}
+.btn{
+	width: 160px;
+	float: right;
+	height: 40px;
+	background: rgb(65,168,99);
+	color: #FFFFFF;
+	text-align: center;
+}
+
+
+

@@ -1,0 +1,12 @@
+
+._input.data-v-bd16df7c {
+	height: 50px;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 5px;
+}
+.forget.data-v-bd16df7c{
+	text-align: center;
+	margin-top: 20px;
+	color: red;
+}
+

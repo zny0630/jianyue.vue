@@ -1,0 +1,111 @@
+
+.content {
+	text-align: center;
+}
+.logo {
+	height: 200rpx;
+	width: 200rpx;
+	margin-top: 200rpx;
+}
+.title {
+	font-size: 36rpx;
+	color: #8f8f94;
+}
+.add-title {
+	/* float: right; */
+	width: 15%;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+._hr{
+}
+.article{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	border-bottom: 1rpx solid #EEEEEE;
+	margin-top: 15px;
+	padding-bottom: 15px;
+}
+.article-title{
+	font-weight:bold;
+	margin-right: 85%;
+}
+.text-img-box{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+}
+.thumbnail-box{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+}
+.thumbnail-item image{
+	width: 220rpx;
+	height: 220rpx;
+	margin-left: 25rpx;
+}
+.left{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1 1 60%;
+	    -ms-flex: 1 1 60%;
+	        flex: 1 1 60%;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	overflow: hidden;
+}
+.right{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1 1 100%;
+	    -ms-flex: 1 1 100%;
+	        flex: 1 1 100%;
+	width: 80%;
+	height: 80%;
+}
+.right image{
+	width: 90%;
+	height: 200rpx;
+}
+.article-info{
+	color: grey;
+	width: 100%;
+	margin-left: -180rpx;
+	margin-top: 10px;
+}
+.avatar{
+width: 75rpx;
+height: 75rpx;
+border-radius: 50%;
+}
+/* 选项卡 */
+.tab{padding:0;}
+/* 导航栏整体设置 */
+.tab-title {white-space:nowrap; /* text-align:center; */}
+/* 导航栏文字梳理 */
+.tab-title view{width:auto; padding:0 8px; margin:0 8px; line-height:42px; display: inline-block; text-align:center;font-size:40rpx;}
+/* .tab-title view:first-child{margin-left: 0;}
+.tab-title view:last-child{margin-right: 0;} */
+/* 导航栏底部下划线设置 */
+
+
