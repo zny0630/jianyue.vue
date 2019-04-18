@@ -20,8 +20,7 @@
 				<button v-show="!show" class="message">{{ count }}s后重新获取</button>
 			</view>
 		</view>
-
-		<button type="primary" @tap="checkCode">下一步</button>
+		<button type="primary" @tap="checkCode" class="ma">下一步</button>
 	</view>
 </template>
 
@@ -132,9 +131,9 @@ input {
 }
 
 .message {
-	width: 150px;
-	background-color: rgb(26, 160, 52);
-	height: 47px;
+	width: 120px;
+	background: linear-gradient(40deg, #ffd86f, #fc6262);
+	height: 40px;
 	color: #ffffff;
 	outline: none;
 }
@@ -142,6 +141,14 @@ input {
 	display: flex;
 	justify-content: center;
 }
+.right{
+	margin-left: 100px;
+}
+.ma{
+	background: linear-gradient(40deg, #ffd86f, #fc6262);
 
-
+}
+.primary{
+	background: linear-gradient(40deg, #ffd86f, #fc6262);
+	}
 </style>

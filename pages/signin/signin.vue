@@ -19,8 +19,17 @@
 		
 		<view class="forget">
 			<navigator url="signup">
-			  新用户注册
+			  还没有账号？点击注册
 			</navigator>
+		</view>
+		<!-- 第三方登录 -->
+		<view class="grace-title" style="margin-top:30px;">
+			<view class="grace-h5 grace-blod grace-center" style='color:#00C777'>第三方登录</view>
+		</view>
+		<view class="grace-login-three" style="margin-top:8px;">
+			<view class="grace-iconfont icon-weixin"></view>
+			<view class="grace-iconfont icon-qq"></view>
+			<view class="grace-iconfont icon-weibo"></view>
 		</view>
 	</view>
 </template>
@@ -97,5 +106,9 @@ input {
 	text-align: center;
 	margin-top: 20px;
 	color: green;
+}
+.green-btn{
+	background: linear-gradient(40deg, #ffd86f, #fc6262);
+
 }
 </style>

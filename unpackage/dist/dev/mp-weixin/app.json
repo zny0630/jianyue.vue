@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/message/message",
+    "pages/message/my_love",
     "pages/my/my",
     "pages/signin/signin",
     "pages/write/write",
@@ -31,7 +32,7 @@
       },
       {
         "pagePath": "pages/message/message",
-        "text": "消息",
+        "text": "会员",
         "iconPath": "static/nav2.png",
         "selectedIconPath": "static/nav2-a.png"
       },

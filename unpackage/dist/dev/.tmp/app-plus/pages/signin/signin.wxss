@@ -1,12 +1,12 @@
 
-._input.data-v-bd16df7c {
+input.data-v-73892996 {
 	height: 50px;
 	border-bottom: 1px solid #eee;
 	margin-bottom: 5px;
 }
-.forget.data-v-bd16df7c{
+.forget.data-v-73892996{
 	text-align: center;
 	margin-top: 20px;
-	color: red;
+	color: green;
 }
 

@@ -7,6 +7,7 @@
 			v-model="renickname"
 			required="required"
 		/>
+		
 		<button class="green-btn" @tap="changeNickname(renickname)">确认修改</button>
 	</view>
 </template>
@@ -43,4 +44,5 @@ input {
 	border-bottom: 1px solid #eee;
 	margin-bottom: 5px;
 }
+
 </style>

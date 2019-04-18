@@ -57,5 +57,7 @@ export default {
 	.uni-input{
 		margin-top: 10px;
 	}
-		
+	.green-btn{
+		background: linear-gradient(40deg, #ffd86f, #fc6262);
+	}	
 </style>

@@ -112,10 +112,10 @@ export default {
 	align-items: center;
 }
 .green-btn{
-	background: rgb(65,168,99);
 	color: #FFFFFF;
 	margin-top: 15px;
 	text-align: center;
+	background: linear-gradient(40deg, #ffd86f, #fc6262);
 	}
 .uni-input{
 	border-bottom: 1px solid #EEEEEE;

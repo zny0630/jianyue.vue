@@ -13,5 +13,11 @@
 </script>
 
 <style>
+	
+
+    @import graceMaskView from "../../graceUI/components/graceMaskView.vue";
+
 	@import 'style/style.css';
+	@import "./graceUI/graceUI.css"
+	
 </style>

@@ -1,12 +1,16 @@
 
-input.data-v-73892996 {
+input.data-v-458f91a6 {
 	height: 50px;
 	border-bottom: 1px solid #eee;
 	margin-bottom: 5px;
 }
-.forget.data-v-73892996{
+.forget.data-v-458f91a6{
 	text-align: center;
 	margin-top: 20px;
 	color: green;
+}
+.green-btn.data-v-458f91a6{
+	background: -o-linear-gradient(50deg, #ffd86f, #fc6262);
+	background: linear-gradient(40deg, #ffd86f, #fc6262);
 }
 

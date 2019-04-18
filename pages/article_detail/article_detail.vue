@@ -3,23 +3,29 @@
 		<text class="article-title">{{ article.title }}</text>
 		<view class="article-info">
 			<image :src="article.avatar" class="avatar small"></image>
-			<text>{{ article.nickname }}</text>
+			<text class="nickname1">{{ article.nickname }}</text>
 			<text class="info-text">{{ handleTime(article.createTime) }}</text>
 			<!-- 登录用户和文章作者不是同一个人，就显示关注或取消关注按钮 -->
 			<button v-if="userId != article.uId && !followed" class="green-btn follow-btn" @tap="follow">关注</button>
 			<button v-if="userId != article.uId && followed" class="green-btn follow-btn cancel" @tap="cancelFollow">取消</button>
 		</view>
-
+                     
 		<view class="grace-text" style="margin-top: 10px;"><rich-text :nodes="article.content" bindtap="tap"></rich-text></view>
+		<button v-if="userId != article.uId && !liked" class="like-btn" @tap="like">收藏 </button>
+		<button  v-if="userId != article.uId && liked" class="like-btn" @tap="cancelLike">取消</button>
+
+		
 		<text class="info-text">评论{{ comments.length }}</text>
 		<view class="comment-item" v-for="(comment, index) in comments" :key="index">
 			<view class="left"><image :src="comment.avatar" class="avatar small"></image></view>
 			<view class="right">
-				<text>{{ comment.nickname }}</text>
+				<text class="nickname">{{ comment.nickname }}</text>
+                </br>
 				<text>{{ comment.content }}</text>
 				<view>
 					<text style="margin-right: 10px;">{{ comments.length - index }}楼</text>
-					<text>{{ handleTime(comment.commentTime) }}</text>
+					</br>
+					<text>{{comment.commentTime}}</text>
 				</view>
 			</view>
 		</view>
@@ -44,7 +50,8 @@ export default {
 			comments: [],
 			content: '',
 			userId: uni.getStorageSync('login_key').userId,
-			followed: false
+			followed: false,
+			liked:false,
 		};
 	},
 	onLoad: function(option) {
@@ -80,12 +87,17 @@ export default {
 					if (res.data.data.followed === '已关注') {
 						_this.followed = true;
 					}
+					if(re.data.data.liked==='已喜欢'){
+						_this.liked=true;
+					}
+					
 				},
 				complete: function() {
 					uni.stopPullDownRefresh();
 				}
 			});
 		},
+		
 		handleTime: function(date) {
 			var d = new Date(date);
 			var year = d.getFullYear();
@@ -136,80 +148,171 @@ export default {
 					}
 				}
 			});
+			
+			
 		},
-		cancelFollow:function(){
-			uni.request({
-				url: this.apiServer + '/follow/cancel',
-				method: 'POST',
-				header: { 'content-type': 'application/x-www-form-urlencoded' },
-				data: {
-					fromUId: this.userId,
-					toUId: this.article.uId
-				},
-				success: res => {
-					if (res.data.code === 0) {
-						uni.showToast({
-							title: '已取消关注'
-						});
-						this.followed = false;
+		like: function() {
+				uni.request({
+					url: this.apiServer + '/like/add',
+					method: 'POST',
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
+					data: {
+						uId: this.userId,
+						aId: this.article.aId
+					},
+					success: res => {
+						if (res.data.code === 0) {
+							uni.showToast({
+								title: '收藏成功'
+							});
+							this.liked = true;
+						}
 					}
-				}
-			});
+				});
+			},
+			cancelFollow: function() {
+				uni.request({
+					url: this.apiServer + '/follow/cancel',
+					method: 'POST',
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
+					data: {
+						fromUId: this.userId,
+						toUId: this.article.uId
+					},
+					success: res => {
+						if (res.data.code === 0) {
+							uni.showToast({
+								title: '已取消关注'
+							});
+							this.followed = false;
+						}
+					}
+				});
+			},
+			cancelLike: function() {
+				uni.request({
+					url: this.apiServer + '/like/cancel',
+					method: 'POST',
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
+					data: {
+						uId: this.userId,
+						aId: this.article.aId
+					},
+					success: res => {
+						if (res.data.code === 0) {
+							uni.showToast({
+								title: '已取消收藏'
+							});
+							this.liked = false;
+						}
+					}
+				});
+			}
 		}
-	}
-};
+	};
+
 </script>
 
 <style>
-.content {
-	margin-bottom: 10px;
-	margin-top: 10px;
-	padding: 5px;
-	border-bottom: 1px solid #eee;
-}
-.img-list {
-	display: flex;
-	flex-direction: column;
-}
-.img-item {
-	width: 100%;
-	height: 150px;
-	margin-bottom: 5px;
-}
-.img-item image {
-	width: 100%;
-	height: 100%;
-	border-radius: 5px;
-}
-.comment-item {
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid #eee;
-	margin-bottom: 10px;
-	padding: 5px;
-}
-.comment-item .left {
-	flex: 1 1 15%;
-}
-.comment-item .right {
-	flex: 1 1 85%;
-	display: flex;
-	flex-direction: column;
-}
-.comment-box {
-	border: 1px solid #fff;
-	border-radius: 5px;
-	background-color: #eee;
-}
-.follow-btn {
-	height: 33px;
-	width: 80px;
-	font-size: 12pt;
-	text-align: center;
-	padding-bottom: 20px;
-	margin-right: 0px;
-}
-.cancel{
-	background-color: #aaa;
-}
+	.container {
+		margin-top: 10px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	.article-title {
+		font-weight: bold;
+		text-align: center;
+		font-size: 15px;
+	}
+
+	.article-info {
+		color: grey;
+		display: flex;
+		justify-content: space-between;
+		margin-top: 5px;
+	}
+
+	.avatar {
+		border-radius: 50%;
+		width: 75upx;
+		height: 75upx;
+	}
+
+	.comment-item {
+		display: flex;
+		margin-top: 15upx;
+	}
+
+	.comment-box {
+		margin-top: 20px;
+	}
+
+	.left {
+		margin-top: 50upx;
+	}
+
+	.right {
+		margin-left: 40upx;
+		color: grey;
+	}
+
+	.info-text {
+		margin-left: 5px;
+		color: #000000;
+	}
+
+	.green-btn {
+		border-radius: 10px;
+		margin-top: 20px;
+        background: linear-gradient(40deg, #ffd86f, #fc6262);
+		color: #EEEEEE;
+		width: 95%;
+	}
+	.like-btn {
+		width:10px;
+		height: 40px;
+		border-radius: 10px;
+		margin-top: 20px;
+	    background: linear-gradient(40deg, #ffd86f, #fc6262);
+		color: #EEEEEE;
+		width: 95%;
+	}
+	
+
+	.article-nickname {
+		margin-left: 10px;
+		color: #000000;
+	}
+
+	.follow-btn {
+		height: 33px;
+		width: 80px;
+		font-size: 12pt;
+		text-align: center;
+		padding-bottom: 20px;
+		margin-right: 0px;
+	}
+
+	.comment-content {
+		color: black;
+	}
+	.nickname{
+		color:#000000;
+		font-family: 楷体;
+		font-size: 15px;
+	}
+	.nickname1{
+		color:#000000;
+		font-family: 黑体;
+		font-size: 15px;
+		margin-right: 20%;
+	}
+
 </style>

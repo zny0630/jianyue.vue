@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
+  "navigationBarBackgroundColor": "#FC6262",
   "navigationBarTitleText": "文章",
   "enablePullDownRefresh": true
 }

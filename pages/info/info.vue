@@ -4,7 +4,7 @@
 			<view class="list-item list-item-heigher">
 				<view class="left">昵称</view>
 				<navigator url="name">
-				<view class="right">{{ nickname }}</view>
+				<view class="right1">{{ nickname }}</view>
 				</navigator>
 			</view>
 			<view class="list-item list-item-heigher">
@@ -12,6 +12,7 @@
 				<view class="right"><image :src="avatar" class="avatar" @tap="showActionSheet"></image></view>
 			</view>
 			<view class="list-item list-item-heigher"><view class="left">修改密码</view></view>
+			
 		</view>
 	</view>
 </template>
@@ -123,10 +124,14 @@ export default {
 	flex: 1 1 10%;
 	/* align-content: center; */
 	margin-top: 20px;
-	margin-right: 200px;
+	margin-right: 150px;
+}
+.right1{
+	font-size: 15px;
 }
 .right {
 	flex: 1 1 30%;
 	margin-top: 8px;
+	margin-right: -90px;
 }
 </style>

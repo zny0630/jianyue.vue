@@ -21,7 +21,10 @@
 	        flex: 1 1 10%;
 	/* align-content: center; */
 	margin-top: 20px;
-	margin-right: 200px;
+	margin-right: 150px;
+}
+.right1{
+	font-size: 15px;
 }
 .right {
 	-webkit-box-flex: 1;
@@ -29,5 +32,6 @@
 	    -ms-flex: 1 1 30%;
 	        flex: 1 1 30%;
 	margin-top: 8px;
+	margin-right: -90px;
 }
 

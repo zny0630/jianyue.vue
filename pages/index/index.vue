@@ -1,29 +1,19 @@
 <template>
-	<view class="content">
-		<scroll-view class="tab-title " scroll-x="true" id="tab-title">
-			<view v-for="(tab, index) in tabs" :key="index"
-				:class="[tabCurrentIndex == index ? 'tab-current' : 'tabpage']"
-				:id="'tabTag-' + index"
-				@tap="tabChange"
-			>
-				{{ tab.name }}
-			</view>
-		</scroll-view>
-		
+	<view class="container">
 		<view class="article-box">
-			<view class="article" v-for="(article,index1) in articles" :key="index1">
+			<view class="article" v-for="(article,index) in articles" :key="index">
+				<!-- 标题 -->
 				<text class="article-title" @tap="gotoDetail(article.id)">{{article.title}}</text>
-				<!-- 大于三张 -->
-				<view class="" v-if="article.imgs.length >=3">
+				<!-- 大于等于三张图片的显示方式 -->
+				<view class="" v-if="article.imgs.length >= 3">
 					<view class="thumbnail-box">
-						<view class="thumbnail-item" v-for="(item,index) in article.imgs" :key="index" >
-							<image :src="item.imgUrl">
-							</image>
+						<view class="thumbnail-item" v-for="(item,index1) in article.imgs" :key="index1" v-if="index1<3">
+							<image :src="item.imgUrl"></image>
 						</view>
 					</view>
 				</view>
-				<!-- 小于三张 -->
-				<view class="" v-else-if="article.imgs.length <=3">
+				<!-- 小于三张图片的显示方式 -->
+				<view class="" v-else-if="article.imgs.length >= 1">
 					<view class="text-img-box">
 						<view class="left">
 							<text>{{handleContent(article.content)}}</text>
@@ -35,18 +25,23 @@
 				</view>
 				<!-- 没有图片的显示方式 -->
 				<view class="text-box" v-else>
-					<text>{{article.title}}</text>
+					<text>{{handleContent(article.content)}}</text>
 				</view>
 				<!-- 文章作者等信息 -->
 				<view class="article-info">
 					<image :src="article.avatar" class="avatar small"></image>
-					<text class="info-text">{{article.nickname}}</text>
-					<text class="info-text">{{ handleTime(article.createTime) }}</text>
+					<text class="info-nickname">{{article.nickname}}</text>
+					</br>
+					<text class="info-text">{{article.createTime}}</text>
 				</view>
-				<hr>
-
 			</view>
 		</view>
+		
+		<!-- <view>这里还什么都没有哦~</view>
+		<view>点击右下角按钮写第一篇文章~</view> -->
+		<navigator url="../write/write" hover-class="navigator-hover">
+			<button class="circle-btn"><text class="icon-text">+</text></button>
+		</navigator>
 	</view>
 </template>
 
@@ -54,19 +49,8 @@
 	export default {
 		data() {
 			return {
-				tabCurrentIndex: 0,
-				swiperCurrentIndex: 0,
-				titleShowId: 'tabTag-0',
-				tabHeight: 300,
-				tabs: [
-					//标签名称 , 分类 id , 加载更多, 加载的页码
-					{ name: '推荐', id: 'pwd1', loadingType: 0, page: 1 },
-					{ name: '转载', id: 'pwd2', loadingType: 0, page: 1 },
-					{ name: '个人', id: 'pwd3', loadingType: 0, page: 1 }
-				],
-				showKeyboard: false,
 				articles: []
-			}
+			};
 		},
 		onLoad: function() {
 			this.getArticles();
@@ -82,7 +66,7 @@
 					url: this.apiServer + '/article/list',
 					method: 'GET',
 					header: {
-						'content-type': 'application/x-www.form-urlencoded'
+						'content-type': 'application/x-www-form-urlencoded'
 					},
 					success: res => {
 						_this.articles = res.data.data;
@@ -97,64 +81,44 @@
 					url: '../article_detail/article_detail?aId=' + aId
 				});
 			},
-			handleTime: function(datetime) {
-				let date = new Date(datetime);
-				let Y = date.getFullYear() + '-';
-				let M = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) + '-' : date.getMonth() + 1 + '-';
-				let D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' ';
-				let h = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':';
-				let m = date.getMinutes() < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':';
-				let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-				return Y + M + D + h + m + s;
+			handleTime: function(date) {
+				var d = new Date(date);
+				var year = d.getFullYear();
+				var month = d.getMonth() + 1;
+				var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
+				var hour = d.getHours() < 10 ? '0' + d.getHours() : '' + d.getHours();
+				var minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : '' + d.getMinutes();
+				var seconds = d.getSeconds() < 10 ? '0' + d.getSeconds() : '' + d.getSeconds();
+				return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
 			},
-			handleContent: function(msg) {
-				let description = msg;
-				description = description.replace(/(\n)/g, "");
-				description = description.replace(/(\t)/g, "");
-				description = description.replace(/(\r)/g, "");
-				description = description.replace(/<\/?[^>]*>/g, "");
-				description = description.replace(/\s*/g, "");
-				return description;
+			handleContent:function(content){
+				content=content.replace(/(\n)/g, "");
+				content=content.replace(/(\t)/g, "");
+				content=content.replace(/(\r)/g, "");
+				content=content.replace(/<\/?[^>]*>/g, "");
+				content=content.replace(/\s*/g, "");
+				return content.substring(0,20);
+				
 			}
 		}
-	}
+	};
 </script>
 
-<style>
-	.content {
-		text-align: center;
-		
-	}
-	.logo {
-		height: 200upx;
-		width: 200upx;
-		margin-top: 200upx;
-	}
-	.title {
-		font-size: 36upx;
-		color: #8f8f94;
-	}
-	.add-title {
-		/* float: right; */
-		width: 15%;
-		position: absolute;
-		right: 0px;
-		bottom: 0px;
-	}
-	hr{
-		
-	}
-	.article{
+<style scoped>
+.article{
 		display: flex;
 		flex-direction: column;
-		border-bottom: 1upx solid #EEEEEE;
+		border-bottom: 2px solid #EEEEEE;
 		margin-top: 15px;
 		padding-bottom: 15px;
-		
+	}
+	.avatar-box{
+		display: flex;
+		flex-direction: row;
 	}
 	.article-title{
-		font-weight:bold;
-		margin-right: 85%;
+		font-weight: 900;
+		margin-bottom: 5px;
 	}
 	.text-img-box{
 		display: flex;
@@ -165,9 +129,9 @@
 		flex-direction: row;
 	}
 	.thumbnail-item image{
-		width: 220upx;
-		height: 220upx;
-		margin-left: 25upx;
+		width: 250upx;
+		height: 240upx;
+		margin-left: 7px;
 	}
 	.left{
 		flex: 1 1 60%;
@@ -178,34 +142,50 @@
 	}
 	.right{
 		flex: 1 1 100%;
-		width: 80%;
-		height: 80%;
+		width: 100%;
+		height: 100%;
 	}
 	.right image{
-		width: 90%;
-		height: 200upx;
+		width: 100%;
+		height: 250upx;
 	}
 	.article-info{
 		color: grey;
 		width: 100%;
-		margin-left: -180upx;
+		margin-left: 10upx;
 		margin-top: 10px;
 	}
 	.avatar{
-	width: 75upx;
-	height: 75upx;
-	border-radius: 50%;
+		width: 75upx;
+		height: 75upx;
+		border-radius: 50%;
 		
 	}
-	
-	/* 选项卡 */
-	.tab{padding:0;}
-	/* 导航栏整体设置 */
-	.tab-title {white-space:nowrap; /* text-align:center; */}
-	/* 导航栏文字梳理 */
-	.tab-title view{width:auto; padding:0 8px; margin:0 8px; line-height:42px; display: inline-block; text-align:center;font-size:40upx;}
-	/* .tab-title view:first-child{margin-left: 0;}
-	.tab-title view:last-child{margin-right: 0;} */
-	/* 导航栏底部下划线设置 */
-	
+	.info-text{
+		margin-left: 10px;
+	}
+.circle-btn {
+		position: fixed;
+		width: 45px;
+		height:45px;
+		right: 10px;
+		bottom: 20px;
+		border-radius: 50%;
+		background-color: #de533a;
+		background: linear-gradient(40deg, #ffd86f, #fc6262);
+		box-shadow: 2px 5px 10px #D1D1D1;
+		cursor: pointer;
+		border: none;
+		outline: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+	}
+.icon-text {
+		font-size: 20pt;
+		color: #fff;
+	}
+
+
 </style>

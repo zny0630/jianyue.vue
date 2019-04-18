@@ -35,9 +35,18 @@ export default {
 </script>
 
 <style>
+	.huiyuan{
+		margin-left: 30upx;
+		width: 120upx;
+		height: 120upx;
+		border-radius: 5px;
+	}
 	.list-item{
 		align-content: center;
 		padding-top: 20px;
 		/* margin-top: 10px; */
+	}
+	.green-btn{
+		background: linear-gradient(40deg, #ffd86f, #fc6262);
 	}
 </style>

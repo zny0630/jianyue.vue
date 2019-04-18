@@ -1,9 +1,19 @@
 
+.huiyuan{
+	margin-left: 30rpx;
+	width: 120rpx;
+	height: 120rpx;
+	border-radius: 5px;
+}
 .list-item{
 	-webkit-align-content: center;
 	    -ms-flex-line-pack: center;
 	        align-content: center;
 	padding-top: 20px;
 	/* margin-top: 10px; */
+}
+.green-btn{
+	background: -o-linear-gradient(50deg, #ffd86f, #fc6262);
+	background: linear-gradient(40deg, #ffd86f, #fc6262);
 }
 

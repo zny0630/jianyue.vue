@@ -1,10 +1,10 @@
 
-._input.data-v-93ea3290 {
+input.data-v-efc0ffe8 {
 	height: 50px;
 	border-bottom: 1px solid #eee;
 	margin-bottom: 5px;
 }
-.mobile-input.data-v-93ea3290 {
+.mobile-input.data-v-efc0ffe8 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -12,14 +12,14 @@
 	height: 50px;
 	border-bottom: 1px solid #eee;
 }
-.message.data-v-93ea3290 {
+.message.data-v-efc0ffe8 {
 	width: 150px;
 	background-color: rgb(26, 160, 52);
 	height: 47px;
 	color: #ffffff;
 	outline: none;
 }
-.auth-code.data-v-93ea3290{
+.auth-code.data-v-efc0ffe8{
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;

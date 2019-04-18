@@ -9,7 +9,8 @@
     "pages/setting/setting",
     "pages/info/name",
     "pages/signin/signup",
-    "pages/signin/password"
+    "pages/signin/password",
+    "pages/article_detail/article_detail"
   ],
   "subPackages": [],
   "window": {
@@ -46,5 +47,6 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "jianyue"
+  "appname": "jianyue",
+  "compilerVersion": "1.8.2"
 }
